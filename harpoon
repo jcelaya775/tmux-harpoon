@@ -116,6 +116,7 @@ _switch() {
 	if ! sessions_has_match "$name=$dirpath"; then
 		if [ "$(uname)" = "Darwin" ]; then sedi="sed -i ''"; else sedi="sed -i"; fi
 		$sedi "s|^$name=.*|" "$cachefile"
+    sesh connect "$name"
 		tmux new -ds "$name" -c "$dirpath"
 	fi
 	exec tmux switch-client -t "$name:$pane"
